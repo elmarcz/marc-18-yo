@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style.css">
+        <link
+            rel="shortcut icon"
+            href="https://avatars.githubusercontent.com/u/83883889?v=4"
+            type="image/x-icon"
+        />
 
-    <title>Marc's Countdown 18yo</title>
-</head>
-<body>
-    <video 
-    autoplay 
-    muted 
-    loop 
-    playsinline>
-    <source src="src/video.mp4" type="video/mp4">
-</video>
+        <link rel="stylesheet" href="style.css" />
 
-    <div class="counter" id="counter">
-        <h2>Marc's Countdown 18yo</h2>
-        <ul>
-            <li><span class="numbers" id="day">3</span> <span>DAYS</span></li>
-            <li><span class="numbers" id="hour">6</span> <span>HOURS</span></li>
-            <li><span class="numbers" id="minute">12</span> <span>MINUTES</span></li>
-            <li><span class="numbers" id="second">23</span> <span>SECONDS</span></li>
-        </ul>
-    </div>
+        <title>Marc's Countdown 18yo</title>
+    </head>
+    <body>
+        <video autoplay muted loop playsinline>
+            <source src="src/video5.mp4" type="video/mp4" />
+        </video>
 
-    <script src="script.js"></script>
-</body>
+        <div class="counter" id="counter">
+            <h2>Marc's Countdown 18yo</h2>
+            <ul>
+                <li>
+                    <span class="numbers" id="day">3</span> <span>DAYS</span>
+                </li>
+                <li>
+                    <span class="numbers" id="hour">6</span> <span>HOURS</span>
+                </li>
+                <li>
+                    <span class="numbers" id="minute">12</span>
+                    <span>MINUTES</span>
+                </li>
+                <li>
+                    <span class="numbers" id="second">23</span>
+                    <span>SECONDS</span>
+                </li>
+            </ul>
+        </div>
+
+        <script src="script.js"></script>
+
+        <script>
+            const source = document.querySelector("source");
+            if (source) {
+                const strings = [
+                    "video1",
+                    "video2",
+                    "video3",
+                    "video4",
+                    "video5",
+                ];
+
+                source.src = `src/${
+                    strings[Math.floor(Math.random() * strings.length)]
+                }.mp4`;
+            } else {
+                console.error(
+                    "No se encontró el elemento <source> en el documento."
+                );
+            }
+        </script>
+    </body>
 </html>
