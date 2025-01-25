@@ -18,27 +18,31 @@ video{
 
 .form-area, .counter, .complete {
     width: 500px;
-    height: 190px;
-    border-radius: 20px;
+    height: 200px;
     text-align: center;
     box-shadow: #1d3647;
-    background-color: #ffffff;
+    background-color: #171717;
+    color: white;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 ul{
     display: flex;
-    height: 90px;
     list-style: none;
     align-items: center;
     justify-content: center;
     padding: 0;
+    margin-bottom: 20px;
 }
 
 ul li{
-    margin: 5px;
+    margin: 10px;
     height: 100%;
-    width: 20%;
     
     display: flex;
     flex-direction: column;
@@ -46,12 +50,33 @@ ul li{
     align-items: center;
     justify-content: center;
 
-    font-weight: 300;
+    font-weight: 200;
     font-size: 20px;
 }
 
 ul li span.numbers{
-    font-size: 50px;
+    font-size: 45px;
     font-weight: 700;
+}
 
+/* Progress bar */
+.progress{
+    --progress: 0%;
+
+    width: 450px;
+    height: 50px;
+    box-shadow: 0 0 4px #aaa;
+}
+
+.bar{
+    background: #5556;
+    height: 100%;
+}
+
+.progress-value{
+    width: var(--progress);
+    height: 100%;
+    background-color: blue;
+    box-shadow: 0 0 10px 2px blue;
+    transition: width 0.5s;
 }
