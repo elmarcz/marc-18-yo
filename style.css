@@ -62,6 +62,7 @@ ul li span.numbers{
 /* Progress bar */
 .progress{
     --progress: 0%;
+    --color: blue;
 
     width: 450px;
     height: 50px;
@@ -76,7 +77,7 @@ ul li span.numbers{
 .progress-value{
     width: var(--progress);
     height: 100%;
-    background-color: blue;
-    box-shadow: 0 0 10px 2px blue;
+    background-color: var(--color);
+    box-shadow: 0 0 10px 2px var(--color);
     transition: width 0.5s;
 }
