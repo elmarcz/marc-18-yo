@@ -24,6 +24,7 @@ setInterval(updateDOM, 1000)
 
 // Barra de carga
 const progress = document.querySelector(".progress")
+const percentage = document.querySelector("#percentage")
 let bar_now = "BTX";
 
 function switchBar() {
@@ -40,6 +41,7 @@ function switchBar() {
         result = result * 0.2739; //0.2739% == 1d
         progress.style.setProperty("--progress", `${result}%`);
         progress.style.setProperty("--color", "blue");
+        percentage.title = `${result.toFixed(2)}%`
 
 
     } else if(bar_now == "Birthday"){
@@ -55,6 +57,7 @@ function switchBar() {
         result = result * 0.418; //0.418% == 1d
         progress.style.setProperty("--progress", `${result}%`);
         progress.style.setProperty("--color", "yellow");
+        percentage.title = `${result.toFixed(2)}%`
     }
  
 }
