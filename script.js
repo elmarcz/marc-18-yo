@@ -49,7 +49,7 @@ function switchBar() {
 
         const date_past_BTX = new Date("10september2024");
         const date_today = new Date();
-        date = new Date("7may2025");
+        date = new Date("9may2025");
     
         let result_ms = date_today - date_past_BTX;
         let result = Math.round(result_ms * (1.1574 * Math.pow(10, -8)));
