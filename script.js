@@ -28,6 +28,8 @@ const progress = document.querySelector(".progress");
 const percentage = document.querySelector("#percentage");
 let currentBar = "BTX";
 
+progress.style.setProperty("--progress", "0%"); // Esta linea es para que la barra empieze desde 0 y tenga animación
+
 function switchBar() {
     if (currentBar === "BTX") {
         currentBar = "Birthday";
