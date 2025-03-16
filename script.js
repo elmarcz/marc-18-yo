@@ -80,16 +80,19 @@ function switchBar() {
         barOptions.option3.active = false;
         barOptions.option1.active = true;
 
-        const pastBTX = new Date("2024-10-10");
+        const pastBTX = new Date("2025-05-09");
         const today = new Date();
-        date = new Date("2025-05-09");
+        date = new Date("2025-17-06")
 
         let elapsedMs = today - pastBTX;
         let elapsedDays = Math.round(elapsedMs / (1000 * 60 * 60 * 24));
-        let progressPercentage = (elapsedDays / 212) * 100; // 212 días entre BTX y el siguiente evento
+        let progressPercentage = (elapsedDays / 365) * 100;
 
         if(progressPercentage < 0) {
             progressPercentage = 100;
+            elapsedMs = 0;
+            elapsedDays = 0;
+            progressPercentage = 0;
         }
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
