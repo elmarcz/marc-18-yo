@@ -26,13 +26,28 @@ setInterval(updateDOM, 1000);
 // Barra de carga
 const progress = document.querySelector(".progress");
 const percentage = document.querySelector("#percentage");
-let currentBar = "BTX";
+
+let barOptions = {
+    option1: {
+        name: "Birthday",
+        active: true
+    },
+    option2: {
+        name: "BTX",
+        active: false
+    },
+    option3: {
+        name: "PAU",
+        active: false
+    }
+}
 
 progress.style.setProperty("--progress", "0%"); // Esta linea es para que la barra empieze desde 0 y tenga animación
 
 function switchBar() {
-    if (currentBar === "BTX") {
-        currentBar = "Birthday";
+    if (barOptions.option1.active == true) {
+        barOptions.option1.active = false;
+        barOptions.option2.active = true;
 
         const pastBirthday = new Date("2024-09-05");
         const today = new Date();
@@ -46,8 +61,9 @@ function switchBar() {
         progress.style.setProperty("--color", "blue");
         percentage.title = `${progressPercentage.toFixed(2)}%`;
         
-    } else if (currentBar === "Birthday") {
-        currentBar = "BTX";
+    } else if (barOptions.option2.active == true) {
+        barOptions.option2.active = false;
+        barOptions.option3.active = true;
 
         const pastBTX = new Date("2024-10-10");
         const today = new Date();
@@ -59,6 +75,25 @@ function switchBar() {
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "yellow");
+        percentage.title = `${progressPercentage.toFixed(2)}%`;
+    } else if (barOptions.option3.active == true) {
+        barOptions.option3.active = false;
+        barOptions.option1.active = true;
+
+        const pastBTX = new Date("2024-10-10");
+        const today = new Date();
+        date = new Date("2025-05-09");
+
+        let elapsedMs = today - pastBTX;
+        let elapsedDays = Math.round(elapsedMs / (1000 * 60 * 60 * 24));
+        let progressPercentage = (elapsedDays / 212) * 100; // 212 días entre BTX y el siguiente evento
+
+        if(progressPercentage < 0) {
+            progressPercentage = 100;
+        }
+
+        progress.style.setProperty("--progress", `${progressPercentage}%`);
+        progress.style.setProperty("--color", "green");
         percentage.title = `${progressPercentage.toFixed(2)}%`;
     }
 }
