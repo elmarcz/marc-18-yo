@@ -105,7 +105,7 @@ function switchBar() {
         }
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
-        progress.style.setProperty("--color", "green");
+        progress.style.setProperty("--color", "#f01851");
         emoji = "🎓";
 
         percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
