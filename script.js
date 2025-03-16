@@ -15,10 +15,17 @@ function updateDOM() {
     let hour = minute * 60;
     let day = hour * 24;
 
-    dayDOM.innerHTML = Math.floor(distance / day) + "d";
-    hourDOM.innerHTML = Math.floor((distance % day) / hour) + "h";
-    minuteDOM.innerHTML = Math.floor((distance % hour) / minute) + "m";
-    secondDOM.innerHTML = Math.floor((distance % minute) / second) + "s";
+    if(isNaN(distance)) {
+        dayDOM.innerHTML = 0;
+        hourDOM.innerHTML = 0;
+        minuteDOM.innerHTML = 0;
+        secondDOM.innerHTML = 0;
+    } else {
+        dayDOM.innerHTML = Math.floor(distance / day) + "d";
+        hourDOM.innerHTML = Math.floor((distance % day) / hour) + "h";
+        minuteDOM.innerHTML = Math.floor((distance % hour) / minute) + "m";
+        secondDOM.innerHTML = Math.floor((distance % minute) / second) + "s";
+    }
 }
 
 setInterval(updateDOM, 1000);
@@ -62,7 +69,7 @@ function switchBar() {
         progress.style.setProperty("--color", "blue");
         emoji = "🎉";
         
-        percentage.title = `${emoji} ${progressPercentage.toFixed(2)}%`;
+        percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
         
     } else if (barOptions.option2.active == true) {
         barOptions.option2.active = false;
@@ -80,7 +87,7 @@ function switchBar() {
         progress.style.setProperty("--color", "yellow");
         emoji = "🏫";
         
-        percentage.title = `${progressPercentage.toFixed(2)}%`;
+        percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
     } else if (barOptions.option3.active == true) {
         barOptions.option3.active = false;
         barOptions.option1.active = true;
@@ -95,16 +102,13 @@ function switchBar() {
 
         if(progressPercentage < 0) {
             progressPercentage = 100;
-            elapsedMs = 0;
-            elapsedDays = 0;
-            progressPercentage = 0;
         }
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "green");
         emoji = "🎓";
 
-        percentage.title = `${progressPercentage.toFixed(2)}%`;
+        percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
     }
 }
 
