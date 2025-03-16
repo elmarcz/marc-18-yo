@@ -27,6 +27,7 @@ setInterval(updateDOM, 1000);
 const progress = document.querySelector(".progress");
 const percentage = document.querySelector("#percentage");
 
+let emoji = "";
 let barOptions = {
     option1: {
         name: "Birthday",
@@ -59,7 +60,9 @@ function switchBar() {
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "blue");
-        percentage.title = `${progressPercentage.toFixed(2)}%`;
+        emoji = "🎉";
+        
+        percentage.title = `${emoji} ${progressPercentage.toFixed(2)}%`;
         
     } else if (barOptions.option2.active == true) {
         barOptions.option2.active = false;
@@ -75,6 +78,8 @@ function switchBar() {
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "yellow");
+        emoji = "🏫";
+        
         percentage.title = `${progressPercentage.toFixed(2)}%`;
     } else if (barOptions.option3.active == true) {
         barOptions.option3.active = false;
@@ -97,6 +102,8 @@ function switchBar() {
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "green");
+        emoji = "🎓";
+
         percentage.title = `${progressPercentage.toFixed(2)}%`;
     }
 }
