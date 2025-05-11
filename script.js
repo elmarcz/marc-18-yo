@@ -5,30 +5,29 @@ const hourDOM = document.querySelector("#hour");
 const minuteDOM = document.querySelector("#minute");
 const secondDOM = document.querySelector("#second");
 
-// Actualiza los elementos del DOM con el tiempo restante
 function updateDOM() {
-    let now = new Date().getTime();
-    let distance = date - now; // Distancia en ms
+    const now = new Date().getTime();
+    const target = date.getTime();
+    const distance = target - now;
 
-    let second = 1000;
-    let minute = second * 60;
-    let hour = minute * 60;
-    let day = hour * 24;
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-    if(isNaN(distance)) {
-        dayDOM.innerHTML = 0;
-        hourDOM.innerHTML = 0;
-        minuteDOM.innerHTML = 0;
-        secondDOM.innerHTML = 0;
-    } else {
-        dayDOM.innerHTML = Math.floor(distance / day) + "d";
-        hourDOM.innerHTML = Math.floor((distance % day) / hour) + "h";
-        minuteDOM.innerHTML = Math.floor((distance % hour) / minute) + "m";
-        secondDOM.innerHTML = Math.floor((distance % minute) / second) + "s";
+    if (isNaN(distance) || distance <= 0) {
+        dayDOM.innerHTML = "0d";
+        hourDOM.innerHTML = "0h";
+        minuteDOM.innerHTML = "0m";
+        secondDOM.innerHTML = "0s";
+        return;
     }
-}
 
-setInterval(updateDOM, 1000);
+    dayDOM.innerHTML = Math.floor(distance / day) + "d";
+    hourDOM.innerHTML = Math.floor((distance % day) / hour) + "h";
+    minuteDOM.innerHTML = Math.floor((distance % hour) / minute) + "m";
+    secondDOM.innerHTML = Math.floor((distance % minute) / second) + "s";
+}
 
 // Barra de carga
 const progress = document.querySelector(".progress");
@@ -48,71 +47,74 @@ let barOptions = {
         name: "PAU",
         active: false
     }
-}
+};
 
-progress.style.setProperty("--progress", "0%"); // Esta linea es para que la barra empieze desde 0 y tenga animación
+progress.style.setProperty("--progress", "0%");
 
 function switchBar() {
-    if (barOptions.option1.active == true) {
+    const today = new Date();
+
+    if (barOptions.option1.active) {
         barOptions.option1.active = false;
         barOptions.option2.active = true;
 
-        const pastBirthday = new Date("2024-09-05");
-        const today = new Date();
+        const past = new Date("2024-09-05");
         date = new Date("2025-09-05");
 
-        let elapsedMs = today - pastBirthday;
-        let elapsedDays = Math.round(elapsedMs / (1000 * 60 * 60 * 24));
+        let elapsedDays = Math.round((today - past) / (1000 * 60 * 60 * 24));
         let progressPercentage = (elapsedDays / 365) * 100;
+
+        if (progressPercentage < 0) progressPercentage = 0;
+        if (progressPercentage > 100) progressPercentage = 100;
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "blue");
         emoji = "🎉";
-        
         percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
-        
-    } else if (barOptions.option2.active == true) {
+
+    } else if (barOptions.option2.active) {
         barOptions.option2.active = false;
         barOptions.option3.active = true;
 
-        const pastBTX = new Date("2024-10-10");
-        const today = new Date();
+        const past = new Date("2024-10-10");
         date = new Date("2025-05-09");
 
-        let elapsedMs = today - pastBTX;
-        let elapsedDays = Math.round(elapsedMs / (1000 * 60 * 60 * 24));
-        let progressPercentage = (elapsedDays / 212) * 100; // 212 días entre BTX y el siguiente evento
+        let elapsedDays = Math.round((today - past) / (1000 * 60 * 60 * 24));
+        let progressPercentage = (elapsedDays / 212) * 100;
+
+        if (progressPercentage < 0) progressPercentage = 0;
+        if (progressPercentage > 100) progressPercentage = 100;
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "yellow");
         emoji = "🏫";
-        
         percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
-    } else if (barOptions.option3.active == true) {
+
+    } else {
         barOptions.option3.active = false;
         barOptions.option1.active = true;
 
-        const pastBTX = new Date("2025-05-09");
-        const today = new Date();
-        date = new Date("2025-17-06")
+        const past = new Date("2025-05-09");
+        date = new Date("2025-06-17"); // ✅ Fecha corregida
 
-        let elapsedMs = today - pastBTX;
-        let elapsedDays = Math.round(elapsedMs / (1000 * 60 * 60 * 24));
-        let progressPercentage = (elapsedDays / 365) * 100;
+        let elapsedDays = Math.round((today - past) / (1000 * 60 * 60 * 24));
+        let progressPercentage = (elapsedDays / 39) * 100;
 
-        if(progressPercentage < 0) {
-            progressPercentage = 100;
-        }
+        if (progressPercentage < 0) progressPercentage = 0;
+        if (progressPercentage > 100) progressPercentage = 100;
 
         progress.style.setProperty("--progress", `${progressPercentage}%`);
         progress.style.setProperty("--color", "#f01851");
         emoji = "🎓";
-
         percentage.title = `${emoji}${progressPercentage.toFixed(2)}%`;
     }
+
+    updateDOM(); // 🟢 Actualizar el contador inmediatamente
 }
 
-switchBar();
+switchBar(); // Configura evento inicial
+setInterval(updateDOM, 1000); // Inicia cuenta atrás
+
 progress.addEventListener("click", () => {
     switchBar();
 });
