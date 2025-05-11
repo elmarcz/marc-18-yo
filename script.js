@@ -95,7 +95,7 @@ function switchBar() {
         barOptions.option1.active = true;
 
         const past = new Date("2025-05-09");
-        date = new Date("2025-06-17"); // ✅ Fecha corregida
+        date = new Date("2025-06-11"); // ✅ Fecha corregida
 
         let elapsedDays = Math.round((today - past) / (1000 * 60 * 60 * 24));
         let progressPercentage = (elapsedDays / 39) * 100;
